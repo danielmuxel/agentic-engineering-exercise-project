@@ -1,0 +1,287 @@
+ ▐▛███▜▌   Claude Code v2.1.85
+▝▜█████▛▘  Opus 4.6 (1M context) · Claude Max
+  ▘▘ ▝▝    ~/…/workshops/agentic-engineering/exercise-project
+
+❯ @CLAUDE.md @README.md was ist redundant? bitte reduziere die CLAUDE.md mit    
+dem absolut notwendigen, aber so dass wir genug über das projekt und die arbeit 
+ darin wissen                                                                   
+  ⎿  Read CLAUDE.md (112 lines)
+  ⎿  Read README.md (39 lines)
+
+⏺ Ich habe beide Dateien bereits gelesen. Hier die Analyse:
+
+  Redundant zwischen CLAUDE.md und README.md:
+  - Setup-Befehle (pnpm install, pnpm dev, etc.)
+  - Endpoints-Liste
+  - Stack-Beschreibung
+  - Projektstruktur
+
+  Nur in CLAUDE.md (wertvoll):
+  - Detaillierte Coding Conventions
+  - Datenmodell mit Felddetails
+  - Validierungs-Details (Zod-Schemas)
+  - Error Handling Codes
+  - TypeScript-Konfiguration
+  - Environment Variables
+  - Important Notes (Limitierungen)
+
+  Ich kürze die CLAUDE.md auf das, was Claude Code wirklich braucht und nicht
+  aus dem Code selbst ableiten kann.
+
+⏺ Update(CLAUDE.md)
+  ⎿  Added 13 lines, removed 102 lines
+        1  # Task API — Claude Code Instructions
+        2  
+        3 -## About this project                                         
+        3 +Task management REST API (Express + TypeScript + Zod). In-memo
+          +ry storage, no database. Created for learning purposes.       
+        4  
+        5 -This is a task management REST API built with Express and Type
+          -Script. It provides CRUD operations for tasks. The project use
+          -s Zod for input validation and stores tasks in memory (no data
+          -base). It was created as a simple backend service for learning
+          - purposes.                                                    
+        5 +## Commands                                                   
+        6  
+        7 -## Technology Stack                                           
+        7 +- `pnpm dev` — Dev server (tsx watch mode)                    
+        8 +- `pnpm test` — Vitest                                        
+        9 +- `pnpm build` — tsc to dist/                                 
+       10 +- `pnpm lint` — ESLint 9                                      
+       11  
+        9 -- **Runtime**: Node.js (version 20 or higher recommended)     
+       10 -- **Language**: TypeScript 5.5 with strict mode enabled       
+       11 -- **Framework**: Express 4.21 for HTTP server                 
+       12 -- **Validation**: Zod 3.23 for schema validation              
+       13 -- **Testing**: Vitest 2.1 for unit tests                      
+       14 -- **Linting**: ESLint 9 for code quality                      
+       15 -- **Dev Server**: tsx for TypeScript execution with watch mode
+       16 -- **Build**: TypeScript compiler (tsc) outputs to dist/       
+       17 -- **Package Manager**: pnpm (recommended) or npm              
+       18 -                                                              
+       19 -## Project Structure                                          
+       20 -                                                              
+       21 -The project follows a standard Express project structure:     
+       22 -                                                              
+       23 -```                                                           
+       24 -src/                                                          
+       25 -  server.ts           — Main entry point, Express app setup, m
+          -iddleware registration                                        
+       26 -  api/                                                        
+       27 -    tasks.ts          — Task route handlers (GET, POST, PUT, D
+          -ELETE)                                                        
+       28 -  utils/                                                      
+       29 -    validate.ts       — Zod schemas (TaskSchema, TaskUpdateSch
+          -ema), validation functions                                    
+       30 -  config/                                                     
+       31 -    index.ts          — Application configuration (port, envir
+          -onment)                                                       
+       32 -```                                                           
+       33 -                                                              
+       34 -## API Endpoints                                              
+       35 -                                                              
+       36 -The API exposes the following endpoints:                      
+       37 -                                                              
+       38 -- `GET /tasks` — Returns an array of all tasks                
+       39 -- `POST /tasks` — Creates a new task. Body must contain `title
+          -` (string, required), `description` (string, optional), `prior
+          -ity` (enum: "low" | "medium" | "high", defaults to "medium")  
+       40 -- `GET /tasks/:id` — Returns a single task by UUID            
+       41 -- `PUT /tasks/:id` — Updates a task. All fields are optional (
+          -partial update)                                               
+       42 -- `DELETE /tasks/:id` — Deletes a task by UUID. Returns 204 on
+          - success                                                      
+       43 -- `GET /health` — Health check endpoint, returns `{ status: "o
+          -k", env: "development" }`                                     
+       44 -                                                              
+       45 -## Data Model                                                 
+       46 -                                                              
+       47 -A Task has the following fields:                              
+       48 -- `id` — UUID string, auto-generated                          
+       49 -- `title` — string, 1-200 characters, required                
+       50 -- `description` — string, optional                            
+       51 -- `priority` — "low" | "medium" | "high", defaults to "medium"
+       52 -- `createdAt` — Date, auto-generated                          
+       53 -- `completed` — boolean, defaults to false                    
+       54 -                                                              
+       55 -## How to run                                                 
+       56 -                                                              
+       57 -1. Install dependencies: `pnpm install`                       
+       58 -2. Start dev server: `pnpm dev`                               
+       59 -3. Run tests: `pnpm test`                                     
+       60 -4. Build for production: `pnpm build`                         
+       61 -5. Lint code: `pnpm lint`                                     
+       62 -                                                              
+       63 -## Configuration                                              
+       64 -                                                              
+       65 -The app reads configuration from environment variables:       
+       66 -- `PORT` — Server port (default: 3000)                        
+       67 -- `NODE_ENV` — Environment name (default: "development")      
+       68 -                                                              
+       69 -Configuration is loaded in `src/config/index.ts`.             
+       70 -                                                              
+       71 -## Validation                                                 
+       72 -                                                              
+       73 -Input validation uses Zod schemas defined in `src/utils/valida
+          -te.ts`. The `TaskSchema` validates creation requests, and `Tas
+          -kUpdateSchema` (partial) validates update requests. Both retur
+          -n structured error objects on failure.                        
+       74 -                                                              
+       75 -## Error Handling                                             
+       76 -                                                              
+       77 -- 400 Bad Request — When validation fails (returns field-level
+          - errors)                                                      
+       78 -- 404 Not Found — When a task ID doesn't exist                
+       79 -- 204 No Content — Successful deletion                        
+       80 -                                                              
+       81 -## TypeScript Configuration                                   
+       82 -                                                              
+       83 -The project uses TypeScript strict mode with the following set
+          -tings:                                                        
+       84 -- Target: ES2022                                              
+       85 -- Module: ESNext                                              
+       86 -- Module Resolution: bundler                                  
+       87 -- Strict: true                                                
+       88 -- esModuleInterop: true                                       
+       89 -- Output directory: dist/                                     
+       90 -- Root directory: src/                                        
+       91 -                                                              
+       92 -## Testing                                                    
+       93 -                                                              
+       94 -Tests are written with Vitest. Run them with `pnpm test`.     
+       95 -                                                              
+       12  ## Coding Conventions
+       13  
+       98 -- Use TypeScript strict mode                                  
+       99 -- Validate all inputs with Zod                                
+      100 -- Use explicit return types on exported functions             
+      101 -- Keep functions small and focused                            
+      102 -- Commits in English                                          
+      103 -- Use conventional commits format                             
+       14 +- TypeScript strict mode                                      
+       15 +- Validate all inputs with Zod schemas (`src/utils/validate.ts
+          +`)                                                            
+       16 +- Explicit return types on exported functions                 
+       17 +- Commits in English, conventional commits format             
+       18  
+      105 -## Important Notes                                            
+       19 +## Limitations                                                
+       20  
+      107 -- The task store is in-memory only — data is lost on restart  
+      108 -- No authentication or authorization implemented              
+      109 -- No rate limiting                                            
+      110 -- CORS is not configured                                      
+      111 -- No logging middleware installed                             
+       21 +- In-memory store only — data lost on restart                 
+       22 +- No auth, no rate limiting, no CORS, no logging middleware   
+
+⏺ Die CLAUDE.md wurde von 112 auf 20 Zeilen reduziert. Entfernt wurde alles, was
+   entweder in der README.md steht (Endpoints, Stack, Projektstruktur, Setup)
+  oder direkt aus dem Code ablesbar ist (Datenmodell, TypeScript-Config, Error
+  Codes, Zod-Schema-Details). Übrig bleibt nur, was Claude Code für die Arbeit
+  im Projekt wirklich braucht: Befehle, Konventionen und bekannte Limitierungen.
+
+❯ leg noch eine settings.json in .claude an mit sinnvollen permissions          
+
+  Read 1 file (ctrl+o to expand)
+
+⏺ Write(.claude/settings.json)
+  ⎿  Wrote 17 lines to .claude/settings.json
+       1 {
+       2   "permissions": {
+       3     "allow": [
+       4       "Bash(pnpm install)",
+       5       "Bash(pnpm dev)",
+       6       "Bash(pnpm test)",
+       7       "Bash(pnpm test:*)",
+       8       "Bash(pnpm build)",
+       9       "Bash(pnpm lint)",
+      10       "Bash(pnpm lint:*)",
+     … +7 lines (ctrl+o to expand)
+
+⏺ .claude/settings.json erstellt mit Permissions für:
+
+  - pnpm: install, dev, test, build, lint (inkl. Wildcards für Sub-Scripts)
+  - vitest: Direktaufrufe via npx
+  - node: Ausführen des Builds aus dist/
+  - curl: Lokale API-Aufrufe zum Testen
+  - git: Alle git-Operationen
+
+  Die Datei ist für die Repo-Ebene gedacht (kann committet werden). Persönliche
+  Einstellungen wie MCP-Server bleiben in settings.local.json.
+
+❯ und disallow destruktive commands                                             
+
+  Read 1 file (ctrl+o to expand)
+
+⏺ Update(.claude/settings.json)
+  ⎿  Added 10 lines
+      12        "Bash(node dist/*)",
+      13        "Bash(curl *localhost*)",
+      14        "Bash(git *)"
+      15 +    ],                                                         
+      16 +    "deny": [                                                  
+      17 +      "Bash(rm -rf *)",                                        
+      18 +      "Bash(git push --force*)",                               
+      19 +      "Bash(git push -f*)",                                    
+      20 +      "Bash(git reset --hard*)",                               
+      21 +      "Bash(git checkout -- .)",                               
+      22 +      "Bash(git clean -f*)",                                   
+      23 +      "Bash(git branch -D*)",                                  
+      24 +      "Bash(git rebase -i*)"                                   
+      25      ]
+      26    }
+      27  }
+
+⏺ Deny-Liste ergänzt für:
+
+  - rm -rf — rekursives Löschen
+  - git push --force / -f — Force Push
+  - git reset --hard — Arbeit verwerfen
+  - git checkout -- . — alle Änderungen verwerfen
+  - git clean -f — ungetrackte Dateien löschen
+  - git branch -D — Branches force-löschen
+  - git rebase -i — interaktiver Rebase (braucht Terminal-Input)
+
+❯ füge ein GET /tasks/stats endpoint hinzu                                      
+
+  Read 2 files (ctrl+o to expand)
+
+⏺ Der /stats-Endpoint muss vor /:id registriert werden, sonst fängt Express
+  "stats" als ID ab.
+
+⏺ Update(src/api/tasks.ts)
+  ⎿  Added 15 lines
+      27    res.status(201).json(task);
+      28  });
+      29  
+      30 +router.get("/stats", (_req: Request, res: Response) => {       
+      31 +  const all = [...tasks.values()];                             
+      32 +  const completed = all.filter((t) => t.completed).length;     
+      33 +  const byPriority = { low: 0, medium: 0, high: 0 };           
+      34 +  for (const t of all) {                                       
+      35 +    byPriority[t.priority]++;                                  
+      36 +  }                                                            
+      37 +  res.json({                                                   
+      38 +    total: all.length,                                         
+      39 +    completed,                                                 
+      40 +    pending: all.length - completed,                           
+      41 +    byPriority,                                                
+      42 +  });                                                          
+      43 +});                                                            
+      44 +                                                               
+      45  router.get("/:id", (req: Request, res: Response) => {
+      46    const task = tasks.get(req.params.id);
+      47    if (!task) {
+
+⏺ GET /tasks/stats hinzugefügt. Liefert:
+
+  {
+    "total": 5,
+    "completed": 2,
+    "pending": 3,
+    "byPriority": { "low": 1, "medium": 3, "high": 1 }
+  }
+
+  Route ist vor /:id registriert, damit Express "stats" nicht als UUID
+  interpretiert.
