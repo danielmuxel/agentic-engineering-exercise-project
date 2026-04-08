@@ -27,6 +27,21 @@ router.post("/", (req: Request, res: Response) => {
   res.status(201).json(task);
 });
 
+router.get("/stats", (_req: Request, res: Response) => {
+  const all = [...tasks.values()];
+  const completed = all.filter((t) => t.completed).length;
+  const byPriority = { low: 0, medium: 0, high: 0 };
+  for (const t of all) {
+    byPriority[t.priority]++;
+  }
+  res.json({
+    total: all.length,
+    completed,
+    pending: all.length - completed,
+    byPriority,
+  });
+});
+
 router.get("/:id", (req: Request, res: Response) => {
   const task = tasks.get(req.params.id);
   if (!task) {
