@@ -1,0 +1,51 @@
+ ▐▛███▜▌   Claude Code v2.1.85
+▝▜█████▛▘  Opus 4.6 (1M context) · Claude Max
+  ▘▘ ▝▝    ~/…/workshops/agentic-engineering/exercise-project
+
+❯ /clear                                                                        
+  ⎿  (no content)
+
+❯ erstelle einen review skill in, der mir hilft code reviews im projekt         
+durchzuführen, er soll security beurteilen, best practices, einfachheit.        
+möglichst umfangreiche kontrolle, ich möchte in "INFO", "WARNING" und           
+"CRITICAL" kategorien, die informationen erhalten                               
+
+⏺ Ich schaue mir zuerst die bestehende Skill-Struktur an.
+
+  Searched for 2 patterns, read 1 file (ctrl+o to expand)
+
+⏺ Jetzt schaue ich mir die Projektstruktur an, um den Skill passend zu
+  gestalten.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+⏺ Bash(mkdir -p .claude/skills/review)
+  ⎿  Done
+
+⏺ Write(.claude/skills/review/SKILL.md)
+  ⎿  Wrote 111 lines to .claude/skills/review/SKILL.md
+      1 # Code Review Skill
+      2 
+      3 Führe ein umfassendes Code Review für dieses Projekt durch. Analy
+        siere alle Source-Dateien in `src/` und bewerte sie systematisch.
+      4 
+      5 ## Vorgehen
+      6 
+      7 1. **Lies alle Source-Dateien** in `src/` vollständig ein
+      8 2. **Analysiere jede Datei** nach den unten definierten Kategorie
+        n
+      9 3. **Erstelle den Report** im vorgegebenen Format
+     … +101 lines (ctrl+o to expand)
+
+⏺ Der Review-Skill ist erstellt unter .claude/skills/review/SKILL.md.
+
+  Was er macht:
+  - Liest alle src/-Dateien und analysiert sie nach 5 Kategorien: Security, Best
+   Practices, Einfachheit, Robustheit, Performance
+  - Klassifiziert Findings als CRITICAL, WARNING oder INFO
+  - Schreibt einen strukturierten Report als review.md mit
+  Datei:Zeile-Referenzen und konkreten Fix-Vorschlägen
+
+  Aufruf: /review in Claude Code.
+
+✻ Churned for 53s

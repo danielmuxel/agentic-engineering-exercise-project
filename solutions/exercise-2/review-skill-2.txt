@@ -1,0 +1,49 @@
+ ▐▛███▜▌   Claude Code v2.1.85
+▝▜█████▛▘  Opus 4.6 (1M context) · Claude Max
+  ▘▘ ▝▝    ~/…/workshops/agentic-engineering/exercise-project
+
+❯ /clear                                                                        
+  ⎿  (no content)
+
+❯ erstelle einen review skill in .claude/skills/, der mir hilft code reviews im 
+ projekt durchzuführen, er soll security beurteilen, best practices,            
+einfachheit. möglichst umfangreiche kontrolle, ich möchte in "INFO", "WARNING"  
+und "CRITICAL" kategorien, die informationen erhalten                           
+
+  Searched for 3 patterns, read 1 file (ctrl+o to expand)
+
+⏺ Bash(mkdir -p /Users/dmu06/dev/fridai/fridai-presentations/workshops/agentic-e
+      ngineering/exercise-project/.claude/skills)
+  ⎿  Done
+
+⏺ Write(.claude/skills/review.md)
+  ⎿  Wrote 127 lines to .claude/skills/review.md
+       1 # Code Review
+       2 
+       3 Comprehensive code review for the current project. Analyzes secu
+         rity, best practices, and simplicity.
+       4 
+       5 ## Usage
+       6 
+       7 ```
+       8 /review [path]        — Review specific file or directory
+       9 /review               — Review all changed files (git diff)
+      10 ```
+     … +117 lines (ctrl+o to expand)
+
+⏺ Skill erstellt unter .claude/skills/review.md.
+
+  Nutzung:
+  - /review — reviewt alle geaenderten Files (oder src/ falls kein Diff)
+  - /review src/api/tasks.ts — reviewt eine bestimmte Datei
+
+  Kategorien:
+  - CRITICAL — Sicherheitsluecken, Datenverlust, Crashes
+  - WARNING — Bad Practices, potenzielle Bugs, Wartbarkeitsprobleme
+  - INFO — Verbesserungsvorschlaege, Stil, Vereinfachungen
+
+  Pruefdimensionen: Security (Injection, Validation, Auth, SSRF, ...), Best
+  Practices (Error Handling, REST, Types, Tests, ...), Simplicity (Dead Code,
+  Over-Engineering, ...), Robustness (Edge Cases, Race Conditions, ...).
+
+  Jedes Finding enthaelt File + Zeilennummer und einen konkreten Fix-Vorschlag.

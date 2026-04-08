@@ -20,3 +20,8 @@ Task management REST API (Express + TypeScript + Zod). In-memory storage, no dat
 
 - In-memory store only — data lost on restart
 - No auth, no rate limiting, no CORS, no logging middleware
+
+## Claude Code Skills
+- Skills liegen in `.claude/skills/<name>/SKILL.md`
+- NICHT in `.claude/commands/` (veraltet)
+- NICHT als `.claude/skills/<name>.md` (falsche Struktur)
